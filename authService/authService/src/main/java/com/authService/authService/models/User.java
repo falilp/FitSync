@@ -22,10 +22,10 @@ public class User{
     private String surName;
     private String email;
     private String password;
-    private Boolean isActive;
-    private Boolean logicalErase;
-    private Date createdDate;
-    private Date lastModifiedDate;
+    private Boolean isActive = true;
+    private Boolean logicalErase = false;
+    private Date createdDate = new Date();
+    private Date lastModifiedDate = new Date();
 
     @Enumerated(EnumType.STRING)
     private Role role;
@@ -46,7 +46,12 @@ public class User{
     public Long getId(){ return id; }
     public String getName(){ return name; }
     public String getSurName(){ return surName; }
+    public String getEmail(){ return email; }
     public String getPassword(){ return password; }
+    public Boolean getIsActive(){ return isActive; }
+    public Boolean getLogicalErase(){ return logicalErase; }
+    public Date getCreatedDate(){ return createdDate; }
+    public Date getLastModifiedDate(){ return lastModifiedDate; }
     public Role getRole(){ return role; }
     //#endregion
 }
