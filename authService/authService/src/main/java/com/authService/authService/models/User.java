@@ -1,6 +1,7 @@
-package com.authService.authService.model;
+package com.authService.authService.models;
 
 //#region imports
+import java.util.Date;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
@@ -14,12 +15,17 @@ import jakarta.persistence.Table;
 @Table(name = "users")
 public class User{
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
     private String name;
     private String surName;
+    private String email;
     private String password;
+    private Boolean isActive;
+    private Boolean logicalErase;
+    private Date createdDate;
+    private Date lastModifiedDate;
 
     @Enumerated(EnumType.STRING)
     private Role role;
