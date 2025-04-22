@@ -2,6 +2,10 @@ package com.authService.authService.models;
 
 //#region imports
 import java.util.Date;
+import java.util.List;
+import java.util.Collection;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
@@ -16,7 +20,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table(name = "users")
-public class User{
+public class User implements UserDetails{
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
@@ -70,6 +74,9 @@ public class User{
     }
 
     @Override
+    public Collection<? extends GrantedAuthority> getAuthorities(){ return List.of(); }
+
+    @Override
     public String toString(){
         return String.format(
             "User[id = %d, userName = %s, name = %s, surName = %s, height = %d, weight = %d, birthDate = %s, " +
@@ -83,7 +90,7 @@ public class User{
 
     //#region getters
     public Long getId(){ return id; }
-    public String getUserName(){ return userName; }
+    public String getUsername(){ return userName; }
     public String getName(){ return name; }
     public String getSurName(){ return surName; }
     public int getHeight(){ return height; }
@@ -117,4 +124,6 @@ public class User{
     public void setRole(Role role){ this.role = role; }
     public void setGender(Gender gender){ this.gender = gender; }
     //#endregion
+    /*@Override
+    public boolean isAccountNonExpired(){ return true; }*/
 }
