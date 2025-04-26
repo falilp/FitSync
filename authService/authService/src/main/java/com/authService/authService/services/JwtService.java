@@ -7,8 +7,10 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class JwtService{
-    @Value("${Security.jwt.secret-key}")
+    @Value("${security.jwt.secret-key}")
     private String secretKey;
-    @Value("${Security.jwt.expiration-time}")
+    @Value("${security.jwt.expiration-time}")
     private long expTime;
+
+    public long expirationTime(){ return expTime; }
 }
