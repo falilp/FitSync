@@ -52,7 +52,7 @@ public class User implements UserDetails{
     @Enumerated(EnumType.STRING)
     private Gender gender;
 
-    protected User(){}
+    public User(){}
 
     public User(String userName, String name, String surName, int height, int weight, Date birthDate, String verifyToken, String email, 
                 String password, Boolean isActive, Boolean logicalErase, Date createdDate, Date lastModifiedDate, Role role, Gender gender){
