@@ -12,6 +12,7 @@ import com.authService.authService.models.User;
 
 public interface UserRepository extends JpaRepository<User, Long>{
     Optional<User> findById(Long id);
+    Optional<User> findByUserName(String username);
     List<User> findByName(String name);
     List<User> findBySurName(String surName);
     List<User> findByRole(Role rol);

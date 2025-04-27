@@ -3,6 +3,7 @@ package com.authService.authService.services;
 //#region imports
 import java.util.Map;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.function.Function;
 import java.security.Key;
 import io.jsonwebtoken.Jwts;
@@ -23,7 +24,11 @@ public class JwtService{
     @Value("${security.jwt.expiration-time}")
     private long expTime;
 
-    public String buildToken(Map<String, Object> claims, String userName){ return generateToken(claims, userName); }
+    public String buildToken(Map<String, Object> claims, String userName){ 
+        if(claims == null) claims = new HashMap<String, Object>();
+
+        return generateToken(claims, userName);
+    }
 
     private Key getSecretKey(){
         byte[] keyBytes = Decoders.BASE64.decode(secretKey);
@@ -33,6 +38,7 @@ public class JwtService{
 
     public String generateToken(Map<String, Object> claims, String userName){
         return Jwts.builder()
+            .setClaims(claims)
             .setSubject(userName)
             .setIssuedAt(new Date())
             .setExpiration(new Date(System.currentTimeMillis() + expTime))
