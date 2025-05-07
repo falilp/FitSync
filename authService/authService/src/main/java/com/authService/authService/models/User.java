@@ -56,20 +56,13 @@ public class User implements UserDetails{
 
     public User(String userName, String name, String surName, int height, int weight, Date birthDate, String verifyToken, String email, 
                 String password, Boolean isActive, Boolean logicalErase, Date createdDate, Date lastModifiedDate, Role role, Gender gender){
-        this.userName = userName;
-        this.name = name;
-        this.surName = surName;
-        this.height = height;
-        this.weight = weight;
-        this.birthDate = birthDate;
-        this.verifyToken = verifyToken;
-        this.email = email;
-        this.password = password;
-        this.isActive = isActive;
-        this.logicalErase = logicalErase;
-        this.createdDate = createdDate;
-        this.lastModifiedDate = lastModifiedDate;
-        this.role = role;
+        this.userName = userName; this.name = name;
+        this.surName = surName; this.height = height;
+        this.weight = weight; this.birthDate = birthDate;
+        this.verifyToken = verifyToken; this.email = email;
+        this.password = password; this.isActive = isActive;
+        this.logicalErase = logicalErase; this.createdDate = createdDate;
+        this.lastModifiedDate = lastModifiedDate; this.role = role;
         this.gender = gender;
     }
 
