@@ -3,12 +3,10 @@ package com.authService.authService.repositories;
 //#region imports
 import java.util.List;
 import java.util.Optional;
-
-import org.springframework.data.jpa.repository.JpaRepository;
-//#endregion
-
 import com.authService.authService.models.Role;
 import com.authService.authService.models.User;
+import org.springframework.data.jpa.repository.JpaRepository;
+//#endregion
 
 public interface UserRepository extends JpaRepository<User, Long>{
     Optional<User> findById(Long id);

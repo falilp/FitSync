@@ -14,9 +14,8 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
-//#endregion
-
 import com.fasterxml.jackson.annotation.JsonIgnore;
+//#endregion
 
 @Entity
 @Table(name = "users")

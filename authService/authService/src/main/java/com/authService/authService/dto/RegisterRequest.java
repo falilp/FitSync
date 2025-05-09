@@ -1,8 +1,7 @@
 package com.authService.authService.dto;
 
-import java.util.Date;
-
 //#region imports
+import java.util.Date;
 import com.authService.authService.models.Gender;
 import com.authService.authService.models.Role;
 //#endregion
