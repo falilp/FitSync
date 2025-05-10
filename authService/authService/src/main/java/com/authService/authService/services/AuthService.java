@@ -19,7 +19,7 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 @Service
 public class AuthService{
     @Autowired
-    private JwtService jwt;
+    private JwtService jwtServ;
     @Autowired
     private UserRepository userRepo;
     @Autowired
@@ -51,7 +51,7 @@ public class AuthService{
     
         userRepo.save(user);
 
-        String token = jwt.buildToken(null, user.getUsername());
+        String token = jwtServ.buildToken(null, user.getUsername());
 
         return new ResgisterResponse("Exito al crear el usuario", token);
     }
@@ -65,7 +65,7 @@ public class AuthService{
 
         User user = userRepo.findByUserName(req.getUsername()).orElseThrow(() -> new RuntimeException("El usuario" + req.getUsername() +" no existe"));
 
-        String token = jwt.buildToken(null, user.getUsername());
+        String token = jwtServ.buildToken(null, user.getUsername());
 
         return new AuthResponse(token);
     }
