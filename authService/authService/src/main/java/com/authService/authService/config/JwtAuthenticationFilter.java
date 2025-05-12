@@ -15,6 +15,8 @@ import org.springframework.web.filter.OncePerRequestFilter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.servlet.HandlerExceptionResolver;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.web.authentication.WebAuthenticationDetailsSource;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 //#endregion
 
 @Component
@@ -40,9 +42,16 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter{
             final String userName = jwtServ.extractUserName(jwt);
 
             if(userName != null && SecurityContextHolder.getContext().getAuthentication() == null){
-                //Optional<User> user = userServ.loadUserByUserName(userName);
+                Optional<User> user = userServ.loadUserByUserName(userName);
+
+                if(jwtServ.validateToken(jwt, userName)){
+                    UsernamePasswordAuthenticationToken authToken = new UsernamePasswordAuthenticationToken(user, null);
+                    authToken.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
+                    SecurityContextHolder.getContext().setAuthentication(authToken);
+                }
             }
 
+            filterChain.doFilter(request, response);
         }catch(Exception excep){ handlerExceptionResolver.resolveException(request, response, null, excep); }
     }
 }

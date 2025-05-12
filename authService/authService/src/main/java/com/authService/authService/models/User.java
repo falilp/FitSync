@@ -116,6 +116,7 @@ public class User implements UserDetails{
     public void setRole(Role role){ this.role = role; }
     public void setGender(Gender gender){ this.gender = gender; }
     //#endregion
-    /*@Override
-    public boolean isAccountNonExpired(){ return true; }*/
+    
+    @Override
+    public boolean isAccountNonExpired(){ return this.isActive; }
 }
