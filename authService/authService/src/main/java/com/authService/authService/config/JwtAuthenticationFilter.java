@@ -2,12 +2,10 @@ package com.authService.authService.config;
 
 //#region imports
 import java.io.IOException;
-import java.util.Optional;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import com.authService.authService.models.User;
 import com.authService.authService.services.JwtService;
 import com.authService.authService.services.UserService;
 import org.springframework.stereotype.Component;
@@ -15,6 +13,7 @@ import org.springframework.web.filter.OncePerRequestFilter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.servlet.HandlerExceptionResolver;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.web.authentication.WebAuthenticationDetailsSource;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -43,12 +42,10 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter{
             final String userName = jwtServ.extractUserName(jwt);
 
             if(userName != null && SecurityContextHolder.getContext().getAuthentication() == null){
-                Optional<User> user = userServ.loadUserByUserName(userName);
-
-                if(!user.isPresent()) throw new UsernameNotFoundException("El nombre de usuario: '" + userName + "' no se encontró");
+                UserDetails user = userServ.loadUserByUsername(userName);
 
                 if(jwtServ.validateToken(jwt, userName)){
-                    UsernamePasswordAuthenticationToken authToken = new UsernamePasswordAuthenticationToken(user.get(), null);
+                    UsernamePasswordAuthenticationToken authToken = new UsernamePasswordAuthenticationToken(user, null);
                     authToken.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
                     SecurityContextHolder.getContext().setAuthentication(authToken);
                 }
